@@ -31,7 +31,8 @@ const { addNote, allNotes } = store
               year: 'numeric',
               month: 'long',
               day: 'numeric'
-            })
+            }),
+           updatedAt: new Date.getTime(),
           }),
             (note.title = ''),
             (note.description = ''),
