@@ -98,6 +98,7 @@ export const useNotesStore = defineStore('notes', {
       const noteIndex = this.notes.findIndex((note: Note) => note.id === id);
       if (noteIndex !== -1) {
         this.notes.splice(noteIndex, 1);
+        this.saveNotesToLocalStorage();
       }
     },
   },
