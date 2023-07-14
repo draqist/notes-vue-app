@@ -3,6 +3,7 @@ import { useNotesStore } from '@/stores/notes'
 import ListNote from './ListNote.vue'
 
 const store = useNotesStore()
+store.loadNotesFromLocalStorage()
 
 const { allNotes } = store
 </script>
