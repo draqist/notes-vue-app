@@ -40,7 +40,7 @@ export const useNotesStore = defineStore('notes', {
       description: string;
       wordCount?: number;
       createdAt?: string;
-      updatedAt?: number
+      updatedA: number
     }): void {
       const newNote: Note = {
         id: this.nextId,
@@ -69,7 +69,7 @@ export const useNotesStore = defineStore('notes', {
       content: string;
       description: string;
       wordCount?: number;
-      updatedAt?: number
+      updatedAt: number
     }): void {
       const noteIndex = this.notes.findIndex((note: Note) => note.id === id);
       if (noteIndex !== -1) {
