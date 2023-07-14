@@ -26,7 +26,7 @@ const { addNote, allNotes } = store
             description: note.description,
             content: note.content,
             wordCount: note.content.split(' ').length,
-            date: new Date().toLocaleDateString('en-US', {
+            createdAt: new Date().toLocaleDateString('en-US', {
               weekday: 'long',
               year: 'numeric',
               month: 'long',
