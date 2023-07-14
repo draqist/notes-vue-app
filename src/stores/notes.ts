@@ -7,7 +7,7 @@ interface Note {
   content: string;
   wordCount?: number;
   createdAt?: string;
-  updatedAt?: number;
+  updatedAt: number;
 }
 
 export const useNotesStore = defineStore('notes', {
