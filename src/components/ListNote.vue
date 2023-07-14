@@ -38,8 +38,8 @@ const noteToggle = () => {
         </div>
       </div>
       <div class="flex items-start gap-x-4">
-        <div class="hidden h-full sm:flex sm:flex-col sm:items-end gap-y-4">
-          <p class="text-sm leading-6 text-white">{{ note.date }}</p>
+        <div class="h-full sm:flex sm:flex-col sm:items-end gap-y-4">
+          <p class="hidden md:inline-block text-sm leading-6 text-white">{{ note.date }}</p>
           <div class="flex gap-2 items-center">
             <PencilSquareIcon
               class="h-6 w-6 flex-none text-gray-400 hover:text-input"
