@@ -58,11 +58,13 @@ export const useNotesStore = defineStore('notes', {
       title,
       content,
       description,
+      wordCount
     }: {
       id: number;
       title: string;
       content: string;
       description: string;
+      wordCount?: number;
     }): void {
       const noteIndex = this.notes.findIndex((note: Note) => note.id === id);
       if (noteIndex !== -1) {
@@ -71,6 +73,7 @@ export const useNotesStore = defineStore('notes', {
           title,
           content,
           description,
+          wordCount,
         };
         this.notes[noteIndex] = updatedNote;
       }

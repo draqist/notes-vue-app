@@ -3,13 +3,14 @@ import { ref } from 'vue'
 import { ChevronRightIcon, ExclamationTriangleIcon, XMarkIcon } from '@heroicons/vue/20/solid'
 import { PencilSquareIcon, TrashIcon } from '@heroicons/vue/24/outline'
 import { Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot } from '@headlessui/vue'
-import {useNotesStore} from '@/stores/notes'
+import { useNotesStore } from '@/stores/notes'
 const notesStore = useNotesStore()
-const {deleteNoteById} = notesStore
+const { updateNote,deleteNoteById } = notesStore
 const props = defineProps(['note'])
 
 const show = ref(false)
 const open = ref(false)
+const editToggle = ref(false)
 
 const noteToggle = () => {
   show.value = !show.value
@@ -56,7 +57,7 @@ const noteToggle = () => {
       </div>
     </div>
     <Transition>
-      <div v-if="show" class="text-white text-lg w-full mt-4 border-t-2 border-gray-600 pt-2">
+      <div v-if="show" class="text-white text-lg w-full mt-4 border-t-[1px] border-slate-600 pt-2">
         {{ note.content }}
       </div>
     </Transition>
@@ -94,7 +95,7 @@ const noteToggle = () => {
               <div class="absolute right-0 top-0 hidden pr-4 pt-4 sm:block">
                 <button
                   type="button"
-                  class="rounded-md bg-[#181818] text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                  class="rounded-md bg-[#181818] text-gray-400 hover:text-gray-500 focus:outline-none"
                   @click="open = false"
                 >
                   <span class="sr-only">Close</span>
@@ -108,13 +109,15 @@ const noteToggle = () => {
                   <ExclamationTriangleIcon class="h-6 w-6 text-red-600" aria-hidden="true" />
                 </div>
                 <div class="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
-                  <DialogTitle as="h3" class="text-lg uppercase font-semibold leading-6 text-slate-400"
+                  <DialogTitle
+                    as="h3"
+                    class="text-lg uppercase font-semibold leading-6 text-slate-400"
                     >Delete Note</DialogTitle
                   >
                   <div class="mt-2">
                     <p class="text-sm text-white">
-                      Are you sure you want to deactivate your account? All of your data will be
-                      permanently removed from our servers forever. This action cannot be undone.
+                      Are you sure you want to this note? All the notes content will be permanently
+                      removed from our servers forever. This action cannot be undone.
                     </p>
                   </div>
                 </div>
@@ -122,8 +125,8 @@ const noteToggle = () => {
               <div class="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
                 <button
                   type="button"
-                  class="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto"
-                  @click="open = false, deleteNoteById(note.id)"
+                  class="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white hover:bg-red-500 sm:ml-3 sm:w-auto"
+                  @click=";(open = false), deleteNoteById(note.id)"
                 >
                   Deactivate
                 </button>
@@ -134,6 +137,96 @@ const noteToggle = () => {
                 >
                   Cancel
                 </button>
+              </div>
+            </DialogPanel>
+          </TransitionChild>
+        </div>
+      </div>
+    </Dialog>
+  </TransitionRoot>
+  <TransitionRoot as="template" :show="editToggle">
+    <Dialog as="div" class="relative z-10" @close="editToggle = false">
+      <TransitionChild
+        as="template"
+        enter="ease-out duration-300"
+        enter-from="opacity-0"
+        enter-to="opacity-100"
+        leave="ease-in duration-200"
+        leave-from="opacity-100"
+        leave-to="opacity-0"
+      >
+        <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity blur-xs" />
+      </TransitionChild>
+
+      <div class="fixed inset-0 z-10 overflow-y-auto">
+        <div
+          class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0"
+        >
+          <TransitionChild
+            as="template"
+            enter="ease-out duration-300"
+            enter-from="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+            enter-to="opacity-100 translate-y-0 sm:scale-100"
+            leave="ease-in duration-200"
+            leave-from="opacity-100 translate-y-0 sm:scale-100"
+            leave-to="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+          >
+            <DialogPanel
+              class="relative transform overflow-hidden rounded-lg bg-[#181818] px-4 pb-4 pt-5 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg sm:p-6"
+            >
+              <div class="w-full bg-[#1e1e1e] max-h-screen p-4 py-6 rounded-xl min-h-[590px]">
+                <form
+                  @submit.prevent="
+                    updateNote({
+                      id: note.id,
+                      title: note.title,
+                      description: note.description,
+                      content: note.content,
+                      wordCount: note.content.split(' ').length,
+                    })
+                  "
+                >
+                  <label for="title" class="text-base">
+                    Title
+                    <input
+                      type="text"
+                      id="title"
+                      name="title"
+                      v-model="note.title"
+                      class="mt-1 mb-5 placeholder:text-sm focus:border-input"
+                      placeholder="Note title"
+                    />
+                  </label>
+                  <label for="content" class="text-base">
+                    Description
+                    <textarea
+                      type="text"
+                      id="description"
+                      name="description"
+                      v-model="note.description"
+                      class="desc mb-5 text-sm placeholder:text-sm mt-1 focus:border-input"
+                      placeholder="Short description of the note"
+                    />
+                  </label>
+                  <label for="content" class="text-base">
+                    Content
+                    <textarea
+                      type="text"
+                      id="content"
+                      name="content"
+                      v-model="note.content"
+                      class="mt-1 placeholder:text-sm focus:border-input"
+                      placeholder="Note content"
+                    />
+                  </label>
+
+                  <button
+                    type="submit"
+                    class="inline-flex items-center rounded-lg bg-primary px-14 h-[48px] mt-4 text-sm font-semibold text-slate-50 shadow-sm hover:bg-[#115017] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+                  >
+                    Save
+                  </button>
+                </form>
               </div>
             </DialogPanel>
           </TransitionChild>

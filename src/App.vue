@@ -16,9 +16,6 @@ const { addNote, allNotes } = store
     <div class="mt-16 mb-3 w-full">
       <div class="flex justify-between items-center">
         <h1 class="text-2xl">Create a new note</h1>
-        <div>
-          <i class="bi-alarm" fontSize="16px" color="hsl(160,100%, 37%, 1)"></i>
-        </div>
       </div>
     </div>
     <div class="w-full bg-[#1e1e1e] max-h-screen p-4 py-6 rounded-xl min-h-[590px]">
@@ -49,7 +46,7 @@ const { addNote, allNotes } = store
             name="title"
             v-model="note.title"
             class="mt-1 mb-5 placeholder:text-sm focus:border-input"
-            placeholder="Title"
+            placeholder="Note title"
           />
         </label>
         <label for="content" class="text-base">
@@ -60,7 +57,7 @@ const { addNote, allNotes } = store
             name="description"
             v-model="note.description"
             class="desc mb-5 text-sm placeholder:text-sm mt-1 focus:border-input"
-            placeholder="Title"
+            placeholder="Short description of the note"
           />
         </label>
         <label for="content" class="text-base">
@@ -71,13 +68,13 @@ const { addNote, allNotes } = store
             name="content"
             v-model="note.content"
             class="mt-1 placeholder:text-sm focus:border-input"
-            placeholder="Title"
+            placeholder="Note content"
           />
         </label>
 
         <button
           type="submit"
-          class="inline-flex items-center rounded-lg bg-input px-14 h-[48px] mt-4 text-sm font-semibold text-white shadow-sm hover:bg-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+          class="inline-flex items-center rounded-lg bg-primary px-14 h-[48px] mt-4 text-sm font-semibold text-slate-50 shadow-sm hover:bg-[#115017] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
         >
           Create
         </button>
