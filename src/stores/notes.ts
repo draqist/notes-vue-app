@@ -51,10 +51,19 @@ export const useNotesStore = defineStore('notes', {
         createdAt,
         updatedAt
       };
-      console.log(newNote);
       this.notes.push(newNote);
-      console.log(this.notes);
       this.nextId++;
+      this.saveNotesToLocalStorage();
+    },
+    loadNotesFromLocalStorage(): void {
+      const notesData = localStorage.getItem('notes');
+      if (notesData) {
+        this.notes = JSON.parse(notesData);
+      }
+    },
+    saveNotesToLocalStorage(): void {
+      const notesData = JSON.stringify(this.notes);
+      localStorage.setItem('notes', notesData);
     },
     updateNote({
       id,
