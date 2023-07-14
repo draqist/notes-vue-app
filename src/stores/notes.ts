@@ -40,7 +40,7 @@ export const useNotesStore = defineStore('notes', {
       description: string;
       wordCount?: number;
       createdAt?: string;
-      updatedA: number
+      updatedAt: number
     }): void {
       const newNote: Note = {
         id: this.nextId,
