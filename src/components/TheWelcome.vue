@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { useNotesStore } from '@/stores/notes'
-import { storeToRefs } from 'pinia'
 import ListNote from './ListNote.vue'
+
 const store = useNotesStore()
-const { notes } = storeToRefs(store)
+
 const { allNotes } = store
 </script>
 

@@ -19,11 +19,7 @@ const { addNote, allNotes } = store
         <div>
           <i class="bi-alarm" fontSize="16px" color="hsl(160,100%, 37%, 1)"></i>
         </div>
-        </div>
-        <!-- <nav>
-          <RouterLink to="/">Home</RouterLink>
-          <RouterLink to="/about">About</RouterLink>
-        </nav> -->
+      </div>
     </div>
     <div class="w-full bg-[#1e1e1e] max-h-screen p-4 py-6 rounded-xl min-h-[590px]">
       <form

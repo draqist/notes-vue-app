@@ -8,13 +8,7 @@ interface Note {
   wordCount?: number;
   date?: string;
 }
-// const initialNote = {
-//   id: 0,
-//   title: '',
-//   description: '',
-//   content: '',
-//   wordCount: 0,
-// }
+
 export const useNotesStore = defineStore('notes', {
   state: () => ({
     notes: [] as Note[],
