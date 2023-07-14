@@ -186,7 +186,8 @@ const noteToggle = () => {
                       title: note.title,
                       description: note.description,
                       content: note.content,
-                      wordCount: note.content.split(' ').length
+                      wordCount: note.content.split(' ').length,
+ updatedAt: new Date.getTime()
                     }), (editToggle = false)
                   "
                 >
