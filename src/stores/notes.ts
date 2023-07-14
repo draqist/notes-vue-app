@@ -76,6 +76,7 @@ export const useNotesStore = defineStore('notes', {
           wordCount,
         };
         this.notes[noteIndex] = updatedNote;
+        console.log(this.notes);
       }
     },
     deleteNoteById(id: number): void {

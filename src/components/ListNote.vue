@@ -1,11 +1,14 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { useNotesStore } from '@/stores/notes'
+import { Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot } from '@headlessui/vue'
+
 import { ChevronRightIcon, ExclamationTriangleIcon, XMarkIcon } from '@heroicons/vue/20/solid'
 import { PencilSquareIcon, TrashIcon } from '@heroicons/vue/24/outline'
-import { Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot } from '@headlessui/vue'
-import { useNotesStore } from '@/stores/notes'
+import { ref } from 'vue'
+
 const notesStore = useNotesStore()
-const { updateNote,deleteNoteById } = notesStore
+const { updateNote, deleteNoteById } = notesStore
+
 const props = defineProps(['note'])
 
 const show = ref(false)
@@ -41,6 +44,7 @@ const noteToggle = () => {
             <PencilSquareIcon
               class="h-6 w-6 flex-none text-gray-400 hover:text-input"
               aria-hidden="true"
+              @click="editToggle = true"
             />
             <TrashIcon
               class="h-6 w-6 flex-none text-red-600 hover:text-red-900"
@@ -182,8 +186,8 @@ const noteToggle = () => {
                       title: note.title,
                       description: note.description,
                       content: note.content,
-                      wordCount: note.content.split(' ').length,
-                    })
+                      wordCount: note.content.split(' ').length
+                    }), (editToggle = false)
                   "
                 >
                   <label for="title" class="text-base">
@@ -192,9 +196,9 @@ const noteToggle = () => {
                       type="text"
                       id="title"
                       name="title"
-                      v-model="note.title"
                       class="mt-1 mb-5 placeholder:text-sm focus:border-input"
                       placeholder="Note title"
+                      v-model="note.title"
                     />
                   </label>
                   <label for="content" class="text-base">
@@ -203,9 +207,9 @@ const noteToggle = () => {
                       type="text"
                       id="description"
                       name="description"
-                      v-model="note.description"
                       class="desc mb-5 text-sm placeholder:text-sm mt-1 focus:border-input"
                       placeholder="Short description of the note"
+                      v-model="note.description"
                     />
                   </label>
                   <label for="content" class="text-base">
@@ -214,9 +218,9 @@ const noteToggle = () => {
                       type="text"
                       id="content"
                       name="content"
-                      v-model="note.content"
                       class="mt-1 placeholder:text-sm focus:border-input"
                       placeholder="Note content"
+                      v-model="note.content"
                     />
                   </label>
 
@@ -244,5 +248,38 @@ const noteToggle = () => {
 .v-leave-to {
   opacity: 0;
   transition: all 0.25s ease-out;
+}
+input {
+  height: 2.85rem;
+  width: 100%;
+  font-size: 1rem;
+  background: transparent;
+  outline: transparent solid 2px;
+  outline-offset: 2px;
+  border-top-right-radius: 8px;
+  border-top-left-radius: 8px;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  border-color: #8a8c90a7;
+  padding: 0 12px 0;
+  color: #8a8c90a7;
+  background: #ffffff0a;
+  font-size: 14px;
+}
+textarea {
+  min-height: 9.5rem;
+  width: 100%;
+  font-size: 1rem;
+  background: transparent;
+  outline: transparent solid 2px;
+  outline-offset: 2px;
+  border-top-right-radius: 8px;
+  border-top-left-radius: 8px;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  border-color: #8a8c90a7;
+  background: rgba(255, 255, 255, 0.04);
+  padding: 12px;
+  color: #8a8c90a7;
 }
 </style>
