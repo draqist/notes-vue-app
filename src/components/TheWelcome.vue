@@ -5,6 +5,15 @@ import ListNote from './ListNote.vue'
 const store = useNotesStore()
 
 const { allNotes } = store
+const getNotesByRecentlyUpdated = () => {
+      return allNotes.sort((a, b) => {
+        const dateA = new Date(a.updatedAt);
+        const dateB = new Date(b.updatedAt);
+        return dateB - dateA;
+      });
+    };
+
+    const sortedNotes = getNotesByRecentlyUpdated()
 </script>
 
 <template>
@@ -12,6 +21,6 @@ const { allNotes } = store
     role="list"
     class="divide-y divide-gray-700 overflow-hidden shadow-sm ring-1 ring-gray-900/5 sm:rounded-xl"
   >
-    <ListNote v-for="note in allNotes.sort((a, b) => b.id - a.id)" :key="note.id" :note="note" />
+    <ListNote v-for="note in sortedNotes" :key="note.id" :note="note" />
   </ul>
 </template>
