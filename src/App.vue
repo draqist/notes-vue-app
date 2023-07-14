@@ -32,7 +32,7 @@ const { addNote, allNotes } = store
               month: 'long',
               day: 'numeric'
             }),
-           updatedAt: new Date.getTime(),
+           updatedAt: Date.now(),
           }),
             (note.title = ''),
             (note.description = ''),
