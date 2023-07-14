@@ -91,7 +91,7 @@ export const useNotesStore = defineStore('notes', {
           updatedAt
         };
         this.notes[noteIndex] = updatedNote;
-        console.log(this.notes);
+        this.saveNotesToLocalStorage();
       }
     },
     deleteNoteById(id: number): void {
