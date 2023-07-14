@@ -6,7 +6,8 @@ interface Note {
   description: string;
   content: string;
   wordCount?: number;
-  date?: string;
+  createdAt?: string;
+  updatedAt?: number;
 }
 
 export const useNotesStore = defineStore('notes', {
@@ -31,13 +32,13 @@ export const useNotesStore = defineStore('notes', {
       content,
       description,
       wordCount,
-      date,
+      createdAt,
     }: {
       title: string;
       content: string;
       description: string;
       wordCount?: number;
-      date?: string;
+      createdAt?: string;
 
     }): void {
       const newNote: Note = {
@@ -46,7 +47,7 @@ export const useNotesStore = defineStore('notes', {
         content,
         description,
         wordCount,
-        date,
+        createdAt,
       };
       console.log(newNote);
       this.notes.push(newNote);
@@ -58,13 +59,15 @@ export const useNotesStore = defineStore('notes', {
       title,
       content,
       description,
-      wordCount
+      wordCount,
+      updatedAt,
     }: {
       id: number;
       title: string;
       content: string;
       description: string;
       wordCount?: number;
+      updatedAt?: number
     }): void {
       const noteIndex = this.notes.findIndex((note: Note) => note.id === id);
       if (noteIndex !== -1) {
@@ -74,6 +77,7 @@ export const useNotesStore = defineStore('notes', {
           content,
           description,
           wordCount,
+          updatedAt
         };
         this.notes[noteIndex] = updatedNote;
         console.log(this.notes);
