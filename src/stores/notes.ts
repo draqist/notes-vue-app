@@ -33,13 +33,14 @@ export const useNotesStore = defineStore('notes', {
       description,
       wordCount,
       createdAt,
+      updatedAt
     }: {
       title: string;
       content: string;
       description: string;
       wordCount?: number;
       createdAt?: string;
-
+      updatedAt?: number
     }): void {
       const newNote: Note = {
         id: this.nextId,
@@ -48,6 +49,7 @@ export const useNotesStore = defineStore('notes', {
         description,
         wordCount,
         createdAt,
+        updatedAt
       };
       console.log(newNote);
       this.notes.push(newNote);
