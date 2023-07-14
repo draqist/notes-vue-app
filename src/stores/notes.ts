@@ -6,12 +6,20 @@ interface Note {
   description: string;
   content: string;
   wordCount?: number;
+  date?: string;
 }
-
+// const initialNote = {
+//   id: 0,
+//   title: '',
+//   description: '',
+//   content: '',
+//   wordCount: 0,
+// }
 export const useNotesStore = defineStore('notes', {
   state: () => ({
     notes: [] as Note[],
     nextId: 1,
+    note: {} as Note,
   }),
   getters: {
     allNotes(state): Note[] {
@@ -29,20 +37,26 @@ export const useNotesStore = defineStore('notes', {
       content,
       description,
       wordCount,
+      date,
     }: {
       title: string;
       content: string;
       description: string;
       wordCount?: number;
+      date?: string;
+
     }): void {
       const newNote: Note = {
         id: this.nextId,
         title,
         content,
         description,
-        wordCount
+        wordCount,
+        date,
       };
+      console.log(newNote);
       this.notes.push(newNote);
+      console.log(this.notes);
       this.nextId++;
     },
     updateNote({
