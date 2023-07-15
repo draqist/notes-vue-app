@@ -3,6 +3,7 @@ import { storeToRefs } from 'pinia'
 import { useNotesStore } from './stores/notes'
 import { RouterView } from 'vue-router'
 const store = useNotesStore()
+store.loadNotesFromLocalStorage()
 const { note } = storeToRefs(store)
 const { addNote, allNotes } = store
 </script>
