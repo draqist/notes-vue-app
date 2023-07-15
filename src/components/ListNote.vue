@@ -9,7 +9,6 @@ import { ref } from 'vue'
 
 const notesStore = useNotesStore()
 const { updateNote, deleteNoteById } = notesStore
-
 const props = defineProps(['note'])
 
 const show = ref(false)
