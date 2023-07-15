@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/no-mutating-props -->
 <script setup lang="ts">
 import { useNotesStore } from '@/stores/notes'
 import { Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot } from '@headlessui/vue'
@@ -187,14 +188,15 @@ const noteToggle = () => {
                       description: note.description,
                       content: note.content,
                       wordCount: note.content.split(' ').length,
- updatedAt: Date.now(),
-createdAt: new Date().toLocaleDateString('en-US', {
-              weekday: 'long',
-              year: 'numeric',
-              month: 'long',
-              day: 'numeric'
-            }),
-                    }), (editToggle = false)
+                      updatedAt: Date.now(),
+                      createdAt: new Date().toLocaleDateString('en-US', {
+                        weekday: 'long',
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric'
+                      })
+                    }),
+                      (editToggle = false)
                   "
                 >
                   <label for="title" class="text-base">
