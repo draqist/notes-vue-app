@@ -60,6 +60,10 @@
   font-weight: normal;
 }
 
+::-webkit-scrollbar{
+  width: 0px;
+  background: transparent;
+}
 body {
   min-height: 100vh;
   color: var(--color-text);
