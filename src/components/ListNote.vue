@@ -188,7 +188,12 @@ const noteToggle = () => {
                       content: note.content,
                       wordCount: note.content.split(' ').length,
  updatedAt: Date.now(),
-createdAt: Date.toDateString()
+createdAt: new Date().toLocaleDateString('en-US', {
+              weekday: 'long',
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric'
+            }),
                     }), (editToggle = false)
                   "
                 >
