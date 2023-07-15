@@ -39,7 +39,7 @@ const noteToggle = () => {
       </div>
       <div class="flex items-start gap-x-4">
         <div class="h-full sm:flex sm:flex-col sm:items-end gap-y-4">
-          <p class="hidden md:inline-block text-sm leading-6 text-white">{{ new Date(note.updatedAt).toLocaleDateString('en-US', {
+          <p class="hidden md:inline-block text-sm leading-6 text-white">{{ Date(note.updatedAt).toLocaleDateString('en-US', {
               weekday: 'long',
               year: 'numeric',
               month: 'long',
