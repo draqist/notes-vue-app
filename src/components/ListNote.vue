@@ -22,7 +22,7 @@ const noteToggle = () => {
 </script>
 
 <template>
-  <li class="hover:bg-[#ffffff0a] px-4 py-5 sm:px-6">
+  <li class="hover:bg-[#ffffff0a] px-3 py-5 sm:px-6">
     <div class="relative flex justify-between gap-x-6">
       <div class="flex gap-x-4">
         <div class="min-w-0 flex-auto">
@@ -30,11 +30,11 @@ const noteToggle = () => {
             <!-- <span class="absolute inset-x-0 -top-px bottom-0" /> -->
             {{ note.title }}
           </p>
-          <div class="mt-1 flex text-xs flex-col leading-5 text-white">
-            <span class="relative truncate hover:text-primary text-base">{{
+          <div class="mt-1 flex text-xs flex-col leading-5 text-slate-400">
+            <span class="relative truncate hover:text-primary text-xs">{{
               note.description
             }}</span>
-            <p class="text-sm leading-5 text-white">Word count: {{ note.wordCount }} words</p>
+            <p class="text-sm leading-5 text-white mt-4">Word count: {{ note.wordCount }} words</p>
           </div>
         </div>
       </div>

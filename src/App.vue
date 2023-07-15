@@ -10,7 +10,7 @@ const { addNote, allNotes } = store
 
 <template>
   <main class="w-full min-[1280px]:h-[calc(100vh-5rem)]">
-    <div class="w-full flex justify-between items-center">
+    <div class="w-full flex justify-between items-center pr-3 sm:pr-0">
       <h2 class="text-3xl text-white font-extrabold uppercase">Vue Notes</h2>
       <span class="text-primary font-medium text-lg">{{ allNotes.length }}</span>
     </div>
