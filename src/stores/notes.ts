@@ -72,13 +72,15 @@ export const useNotesStore = defineStore('notes', {
       description,
       wordCount,
       updatedAt,
+      createdAt,
     }: {
       id: number;
       title: string;
       content: string;
       description: string;
       wordCount?: number;
-      updatedAt: number
+      updatedAt: number;
+      createdAt: string;
     }): void {
       const noteIndex = this.notes.findIndex((note: Note) => note.id === id);
       if (noteIndex !== -1) {
@@ -88,7 +90,8 @@ export const useNotesStore = defineStore('notes', {
           content,
           description,
           wordCount,
-          updatedAt
+          updatedAt,
+          createdAt,
         };
         this.notes[noteIndex] = updatedNote;
         this.saveNotesToLocalStorage();
