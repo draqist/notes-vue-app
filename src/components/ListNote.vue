@@ -188,7 +188,13 @@ const noteToggle = () => {
                       content: editableNote.content,
                       wordCount: editableNote.content.split(' ').length,
                       updatedAt: Date.now(),
-                      createdAt: props?.note?.createdAt}),
+                      createdAt: props?.note?.createdAt ?? new Date().toLocaleDateString('en-US', { 
+         weekday: 'long', 
+         year: 'numeric', 
+         month: 'long', 
+         day: 'numeric' 
+       })
+}),
                       (editToggle = false)
                   "
                 >
