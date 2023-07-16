@@ -60,7 +60,7 @@
   font-weight: normal;
 }
 
-::-webkit-scrollbar{
+::-webkit-scrollbar {
   width: 0px;
   background: transparent;
 }
@@ -68,7 +68,7 @@ body {
   min-height: 100vh;
   color: var(--color-text);
   background: var(--color-background);
-  transition: color 0.5s ease, background-color 0.5s ease, all 0.5s ease;
+  transition: color 0.5s ease, all 0.5s ease;
   line-height: 1.6;
   font-family: 'JetBrains Mono';
   font-size: 15px;

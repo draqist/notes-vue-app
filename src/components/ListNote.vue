@@ -1,20 +1,22 @@
 <!-- eslint-disable vue/no-mutating-props -->
 <script setup lang="ts">
-import { useNotesStore } from '@/stores/notes'
+import { useNotesStore, type Note } from '@/stores/notes'
+
 import { Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot } from '@headlessui/vue'
 
 import { ChevronRightIcon, ExclamationTriangleIcon, XMarkIcon } from '@heroicons/vue/20/solid'
 import { PencilSquareIcon, TrashIcon } from '@heroicons/vue/24/outline'
-import { ref } from 'vue'
+import { reactive, ref } from 'vue'
 
 const notesStore = useNotesStore()
 const { updateNote, deleteNoteById } = notesStore
-const props = defineProps(['note'])
+const props = defineProps({ note: { type: Object as () => Note, required: true } })
 
 const show = ref(false)
 const open = ref(false)
 const editToggle = ref(false)
-
+const editableNote = reactive(props.note)
+console.log(editableNote)
 const noteToggle = () => {
   show.value = !show.value
 }
@@ -26,13 +28,11 @@ const noteToggle = () => {
       <div class="flex gap-x-4">
         <div class="min-w-0 flex-auto">
           <p class="text-xl uppercase font-semibold leading-6 text-white">
-            <!-- <span class="absolute inset-x-0 -top-px bottom-0" /> -->
             {{ note.title }}
           </p>
           <div class="mt-1 flex text-xs flex-col leading-5 text-slate-400">
-            <span class="relative truncate hover:text-primary text-xs">{{
-              note.description
-            }}</span>
+            <span class="relative truncate hover:text-primary text-xs">{{ note.description }}</span>
+
             <p class="text-sm leading-5 text-white mt-4">Word count: {{ note.wordCount }} words</p>
           </div>
         </div>
@@ -206,7 +206,7 @@ const noteToggle = () => {
                       name="title"
                       class="mt-1 mb-5 placeholder:text-sm focus:border-input"
                       placeholder="Note title"
-                      v-model="note.title"
+                      v-model="editableNote.title"
                     />
                   </label>
                   <label for="content" class="text-base">
@@ -217,7 +217,7 @@ const noteToggle = () => {
                       name="description"
                       class="desc mb-5 text-sm placeholder:text-sm mt-1 focus:border-input"
                       placeholder="Short description of the note"
-                      v-model="note.description"
+                      v-model="editableNote.description"
                     />
                   </label>
                   <label for="content" class="text-base">
@@ -228,7 +228,7 @@ const noteToggle = () => {
                       name="content"
                       class="mt-1 placeholder:text-sm focus:border-input"
                       placeholder="Note content"
-                      v-model="note.content"
+                      v-model="editableNote.content"
                     />
                   </label>
 
@@ -239,6 +239,7 @@ const noteToggle = () => {
                     Save
                   </button>
                 </form>
+                <!-- <NoteForm :initialNote={note} formType="update" /> -->
               </div>
             </DialogPanel>
           </TransitionChild>
