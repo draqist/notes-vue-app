@@ -188,7 +188,7 @@ const noteToggle = () => {
                       content: editableNote.content,
                       wordCount: editableNote.content.split(' ').length,
                       updatedAt: Date.now(),
-                      createdAt: props.note.createdAt}),
+                      createdAt: props?.note?.createdAt}),
                       (editToggle = false)
                   "
                 >
