@@ -1,4 +1,4 @@
-<!-- eslint-disable vue/no-mutating-props -->
+
 <script setup lang="ts">
 import { useNotesStore, type Note } from '@/stores/notes'
 
