@@ -182,19 +182,13 @@ const noteToggle = () => {
                 <form
                   @submit.prevent="
                     updateNote({
-                      id: note.id,
-                      title: note.title,
-                      description: note.description,
-                      content: note.content,
-                      wordCount: note.content.split(' ').length,
+                      id: props.note.id,
+                      title: editableNote.title,
+                      description: editableNote.description,
+                      content: editableNote.content,
+                      wordCount: editableNote.content.split(' ').length,
                       updatedAt: Date.now(),
-                      createdAt: new Date().toLocaleDateString('en-US', {
-                        weekday: 'long',
-                        year: 'numeric',
-                        month: 'long',
-                        day: 'numeric'
-                      })
-                    }),
+                      createdAt: props.note.createdAt
                       (editToggle = false)
                   "
                 >
