@@ -1,4 +1,3 @@
-
 <script setup lang="ts">
 import { useNotesStore, type Note } from '@/stores/notes'
 
@@ -16,7 +15,6 @@ const show = ref(false)
 const open = ref(false)
 const editToggle = ref(false)
 const editableNote = reactive(props.note)
-console.log(editableNote)
 const noteToggle = () => {
   show.value = !show.value
 }
@@ -176,9 +174,11 @@ const noteToggle = () => {
             leave-to="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
           >
             <DialogPanel
-              class="relative transform overflow-hidden rounded-lg bg-[#181818] px-4 pb-4 pt-5 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg sm:p-6"
+              class="relative transform overflow-hidden rounded-lg bg-transparent px-4 pb-4 pt-5 text-left transition-all sm:my-8 sm:w-full sm:max-w-lg sm:p-6"
             >
-              <div class="w-full bg-[#1e1e1e] max-h-screen p-4 py-6 rounded-xl min-h-[590px]">
+              <div
+                class="w-full bg-[#1e1e1e] max-h-screen px-2 sm:px-6 py-6 rounded-2xl min-h-[590px]"
+              >
                 <form
                   @submit.prevent="
                     updateNote({
@@ -188,13 +188,15 @@ const noteToggle = () => {
                       content: editableNote.content,
                       wordCount: editableNote.content.split(' ').length,
                       updatedAt: Date.now(),
-                      createdAt: props?.note?.createdAt ?? new Date().toLocaleDateString('en-US', { 
-         weekday: 'long', 
-         year: 'numeric', 
-         month: 'long', 
-         day: 'numeric' 
-       })
-}),
+                      createdAt:
+                        props?.note?.createdAt ??
+                        new Date().toLocaleDateString('en-US', {
+                          weekday: 'long',
+                          year: 'numeric',
+                          month: 'long',
+                          day: 'numeric'
+                        })
+                    }),
                       (editToggle = false)
                   "
                 >
@@ -239,7 +241,6 @@ const noteToggle = () => {
                     Save
                   </button>
                 </form>
-                <!-- <NoteForm :initialNote={note} formType="update" /> -->
               </div>
             </DialogPanel>
           </TransitionChild>

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useNotesStore, type Note } from '@/stores/notes'
 import { reactive } from 'vue'
+import { useToast } from 'vue-toast-notification'
 const props = defineProps({
   note: {
     type: Object as () => Note,
@@ -20,9 +21,16 @@ const store = useNotesStore()
 const noteData = reactive(store.note)
 const { updateNote, addNote } = store
 store.loadNotesFromLocalStorage()
+const $toast = useToast()
 
 function handleSubmit() {
   if (props.formType === 'create') {
+    if (!noteData.title || !noteData.description || !noteData.content) {
+      $toast.warning('Please fill all the fields', {
+        position: 'top-right',
+        duration: 2000
+      })
+    }
     addNote({
       title: noteData.title,
       description: noteData.description,
